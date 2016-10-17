@@ -23,6 +23,11 @@ if (coveoua.q) {
   coveoua.q.forEach( (args: Array<string>) => SimpleAnalytics.apply(void 0, args));
 }
 
+// Replace the quick shim with the real thing.
+global.coveoua = SimpleAnalytics;
+
+global.coveoanalytics = analytics;
+
 // According to the Mozilla Do Not Track Field Guide
 // (https://developer.mozilla.org/en-US/docs/Web/Security/Do_not_track_field_guide),
 // gathering data of actions of an user as long as it is not associated to the
@@ -37,10 +42,5 @@ if (!coveoua.disableAutoHistory) {
     };
     store.addElement(historyElement);
 }
-
-// Replace the quick shim with the real thing.
-global.coveoua = SimpleAnalytics;
-//
-global.coveoanalytics = analytics;
 
 export default coveoua;
